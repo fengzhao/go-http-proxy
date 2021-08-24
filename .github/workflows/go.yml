@@ -21,21 +21,26 @@ jobs:
         go-version: 1.16
     - run: go version
     
-    - name: Build
-      run: go build -v ./...
-
+    
     - name: Test
       run: go test -v ./...
       
-
-
-    - uses: actions/checkout@master
-    - name: Create a Release
-      uses: elgohr/Github-Release-Action@master
-  
-      env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+    - name: Build
+      run: go build -v ./...
+       
+    - name: Upload artifacts linux_amd64
+      uses: actions/upload-artifact@v2
       with:
-        args: MyReleaseMessage
+        name: go-http-proxy
+        path: ./go-http-proxy
+
+#     - uses: actions/checkout@master
+#     - name: Create a Release
+#       uses: elgohr/Github-Release-Action@master
+  
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+#       with:
+#         args: MyReleaseMessage
       
       
